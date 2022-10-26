@@ -26,7 +26,8 @@ uses
   FMX.NumberBox,
   FMX.ListView,
   FMX.ListView.Types,
-  FMX.ListView.Appearances;
+  FMX.ListView.Appearances,
+  FMX.Graphics;
 
 var
   FListViewItem : TListViewItem;
@@ -87,7 +88,9 @@ begin
         FListViewItem := TListView(aComponent).Items.Item[TOrionBindSyncList(aValue.AsObject).Index] as TListViewItem;
         lListViewItemObject := FListViewItem.Objects.FindDrawable(TOrionBindSyncList(aValue.AsObject).ComponentName);
         if lListViewItemObject is TListItemText then
-          TListItemText(lListViewItemObject).Text := TorionBindSyncList(aValue.AsObject).Value.ToString;
+          TListItemText(lListViewItemObject).Text := TorionBindSyncList(aValue.AsObject).Value.ToString
+        else if lListViewItemObject is TListItemImage then
+          TListItemImage(lListViewItemObject).Bitmap := TBitmap(TorionBindSyncList(aValue.AsObject).Value.AsObject);
       end;
     end;
     TOrionMiddlewareCommand.ListBindGetValue : begin
