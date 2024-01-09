@@ -54,6 +54,8 @@ begin
         aValue := TNumberBox(aComponent).Value
       else if aComponent is TSwitch then
         aValue := TSwitch(aComponent).IsChecked
+      else if aComponent is TCheckBox then
+        aValue := TCheckBox(aComponent).IsChecked
       else
         raise OrionBindingsException.Create(Format('%s: %s not supported', [OrionBindingsException.ClassName, aComponent.ClassName]));
     end;
@@ -64,9 +66,11 @@ begin
       else if aComponent is TLabel then
         TLabel(aComponent).Text := aValue.ToString
       else if aComponent is TNumberBox then
-        TNumberBox(aComponent).Text := aValue.AsString
+        TNumberBox(aComponent).Text := aValue.ToString
       else if aComponent is TSwitch then
         TSwitch(aComponent).IsChecked := aValue.AsBoolean
+      else if aComponent is TCheckBox then
+        TCheckBox(aComponent).IsChecked := aValue.AsBoolean
       else
         raise OrionBindingsException.Create(Format('%s: %s not supported', [OrionBindingsException.ClassName, aComponent.ClassName]));
     end;
